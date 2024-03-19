@@ -15,6 +15,7 @@ const TodoPage = (): ReactElement => {
 
   const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
     .filter(todo => todo.userId === userId);
+
   return (
     <>
       <Head>
@@ -22,14 +23,13 @@ const TodoPage = (): ReactElement => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>이벤트 - TODOS</title>
       </Head>
-      <a href="/user">유저 목록으로 가기</a>
+      <a href="/users">유저 목록으로 가기</a>
       <div className={styles.todoapp}>
         <h1>TODOS</h1>
         <TodoInput userId={userId} />
         <main>
-          <input className={styles.toggleAll} type="checkbox" />
           <TodoList todoItems={todoItems} />
-          <TodoFilter userId={userId}/>
+          <TodoFilter userId={userId} />
         </main>
       </div>
     </>

@@ -32,4 +32,4 @@ const todoItemsSlice = createSlice({
 });
 
 export const { initTodo, addTodo, deleteTodo, editTodo, toggleTodo } = todoItemsSlice.actions;
-export const todoItemsReducer = todoItemsSlice.reducer
+export const todoItemsReducer = todoItemsSlice.reducer;

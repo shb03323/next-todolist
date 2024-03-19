@@ -1,17 +1,18 @@
 import styles from "@/pages/todo/styles/TodoPage.module.css";
-import { deleteTodo, toggleTodo } from "@/domain/todo/todoItemsSlice";
 import React, { useEffect, useRef } from "react";
-import { useCustomDispatch, useCustomSelector } from "@/redux/hooks";
+import { useCustomSelector } from "@/redux/hooks";
 import { TodoItemProps } from "@/pages/todo/props/TodoItemProps";
 import TodoEdit from "@/pages/todo/TodoEdit";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
+import useTodoItemHandler from "@/pages/todo/events/useTodoItemHandler";
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo }: TodoItemProps) => {
   const currentFilter = useCustomSelector(state => state.filter);
-  const dispatch = useCustomDispatch();
 
   const liRef = useRef<HTMLLIElement>(null);
   const editInputRef = useRef<HTMLInputElement>(null);
+
+  const { handleDoubleClick, handleToggle, handleDelete } = useTodoItemHandler(todo, liRef, editInputRef);
 
   useEffect(() => {
     filterTodo(currentFilter);
@@ -38,24 +39,6 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }: TodoItemProps) => {
           }
       }
     }
-  };
-
-  const handleDoubleClick = () => {
-    if (liRef.current) {
-      liRef.current.classList.add(styles.editing);
-    }
-    if (editInputRef.current) {
-      editInputRef.current.value = todo.text;
-      editInputRef.current.focus();
-    }
-  };
-
-  const handleToggle = () => {
-    dispatch(toggleTodo(todo.id));
-  };
-
-  const handleDelete = () => {
-    dispatch(deleteTodo(todo.id));
   };
 
   return (

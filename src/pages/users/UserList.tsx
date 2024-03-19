@@ -1,17 +1,13 @@
 import React, { ReactElement } from "react";
-import styles from "@/pages/user/styles/UserPage.module.css";
+import styles from "@/pages/users/styles/UserPage.module.css";
 import { useCustomSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { IUser } from "@/domain/user/IUser";
-import { useRouter } from "next/router";
+import useUserLiDoubleClickHandler from "@/pages/users/events/useUserLiDoubleClickHandler";
 
 const UserList = (): ReactElement => {
-  const router = useRouter();
   const users: IUser[] = useCustomSelector((state: RootState) => state.users);
-
-  const handleDoubleClick = (userId: number) => {
-    router.push(`/todo?userId=${userId}`)
-  }
+  const { handleDoubleClick } = useUserLiDoubleClickHandler();
 
   return (
     <ul className={styles.userList}>

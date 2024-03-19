@@ -13,7 +13,7 @@ const usersSlice = createSlice({
       state.push(action.payload);
       updateUsersStorage(state);
     },
-  }
+  },
 });
 
 export const { initUsers, addUser } = usersSlice.actions;

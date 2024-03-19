@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-        <a href="/user">
+        <a href="/src/pages/users">
           <p>유저</p>
         </a>
       </main>

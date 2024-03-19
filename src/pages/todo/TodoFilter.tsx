@@ -1,58 +1,20 @@
-import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { useCustomDispatch, useCustomSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import React, { ReactElement, useRef } from "react";
+import React, { useRef } from "react";
 import styles from "@/pages/todo/styles/TodoPage.module.css";
-import { setFilter } from "@/domain/todo/filterSlice";
-import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
+import { TodoItemFilter } from "@/domain/todo/FilterType";
 import { UserIdProps } from "@/pages/todo/props/UserIdProps";
+import useTodoFilterHandler from "@/pages/todo/events/useTodoFilterHandler";
+import TodoCount from "@/pages/todo/TodoCount";
 
 const TodoFilter: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
-  const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
-    .filter(todo => todo.userId === userId);
-  const currentFilter: FilterType = useCustomSelector((state: RootState) => state.filter);
-  const dispatch = useCustomDispatch();
-
   const allTagRef = useRef<HTMLAnchorElement>(null);
   const activeTagRef = useRef<HTMLAnchorElement>(null);
   const completedTagRef = useRef<HTMLAnchorElement>(null);
 
-  const filteredTodoItems = todoItems.filter(todo => {
-    switch (currentFilter) {
-      case TodoItemFilter.ALL:
-        return true;
-      case TodoItemFilter.ACTIVE:
-        return !todo.completed;
-      case TodoItemFilter.COMPLETED:
-        return todo.completed;
-      default:
-        return true;
-    }
-  });
-
-  const handleFilterChange = (filter: FilterType) => {
-    dispatch(setFilter(filter));
-    allTagRef.current!.classList.remove(styles.selected);
-    activeTagRef.current!.classList.remove(styles.selected);
-    completedTagRef.current!.classList.remove(styles.selected);
-    switch (filter) {
-      case "all":
-        allTagRef.current!.classList.add(styles.selected);
-        break;
-      case "active":
-        activeTagRef.current!.classList.add(styles.selected);
-        break;
-      case "completed":
-        completedTagRef.current!.classList.add(styles.selected);
-        break;
-      default:
-        break;
-    }
-  };
+  const { handleFilterChange } = useTodoFilterHandler(allTagRef, activeTagRef, completedTagRef);
 
   return (
     <div className={styles.countContainer}>
-      <span className={styles.todoCount}>총 <strong>{filteredTodoItems.length}</strong> 개</span>
+      <TodoCount userId={userId} />
       <ul className={styles.filters}>
         <li>
           <a ref={allTagRef}

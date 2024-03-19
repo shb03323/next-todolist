@@ -1,8 +1,7 @@
-import
-{ ReactElement, useEffect } from "react";
-import styles from "@/pages/user/styles/UserPage.module.css";
-import UserInput from "@/pages/user/UserInput";
-import UserList from "@/pages/user/UserList";
+import { ReactElement, useEffect } from "react";
+import styles from "@/pages/users/styles/UserPage.module.css";
+import UserInput from "@/pages/users/UserInput";
+import UserList from "@/pages/users/UserList";
 import { initUsers } from "@/domain/user/usersSlice";
 import { useCustomDispatch } from "@/redux/hooks";
 import { initTodo } from "@/domain/todo/todoItemsSlice";
@@ -13,7 +12,7 @@ const UserPage = (): ReactElement => {
   useEffect(() => {
     dispatch(initUsers());
     dispatch(initTodo())
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.userPage}>
