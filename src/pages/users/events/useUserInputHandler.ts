@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from "react";
 import { useCustomDispatch } from "@/redux/hooks";
 import { addUser } from "@/domain/user/usersSlice";
+import koreanInputPrevent from "@/pages/util/events/koreanInputPrevent";
 
 const useUserInputHandler = () => {
   const [text, setText] = useState<string>("");
   const dispatch = useCustomDispatch();
 
-  const handleKeyPress = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
+      if (koreanInputPrevent(event)) return;
       if (text.trim() !== "") {
         dispatch(addUser({
           id: Date.now(),
@@ -23,7 +25,7 @@ const useUserInputHandler = () => {
     setText(value);
   }, []);
 
-  return { name: text, handleKeyPress, handleChangeInput };
+  return { name: text, handleKeyDown, handleChangeInput };
 };
 
 export default useUserInputHandler;

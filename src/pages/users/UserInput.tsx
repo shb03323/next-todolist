@@ -4,13 +4,13 @@ import useUserInputHandler from "@/pages/users/events/useUserInputHandler";
 
 const UserInput = (): ReactElement => {
   const addInputRef = useRef<HTMLInputElement>(null);
-  const { name, handleKeyPress, handleChangeInput } = useUserInputHandler();
+  const { name, handleKeyDown, handleChangeInput } = useUserInputHandler();
 
   return (
     <input ref={addInputRef}
            className={styles.newUser}
            placeholder="유저를 추가해주세요"
-           onKeyDown={handleKeyPress}
+           onKeyDown={handleKeyDown}
            onChange={handleChangeInput}
            value={name}>
     </input>
