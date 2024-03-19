@@ -1,26 +1,9 @@
-import styles from "@/styles/TodoPage.module.css";
-import { ReactElement, useEffect } from "react";
+import styles from "@/pages/todo/styles/TodoPage.module.css";
+import React from "react";
 import TodoItem from "@/pages/todo/TodoItem";
-import { TodoRootState } from "@/domain/todo/store";
-import { useCustomDispatch, useCustomSelector } from "@/domain/todo/hooks";
-import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { loadLocalStorage } from "@/domain/todo/localStorageManager";
-import { addTodo } from "@/domain/todo/todoItemsSlice";
+import { TodoListProps } from "@/pages/todo/props/TodoListProps";
 
-const TodoList = (): ReactElement => {
-//   useEffect(() => {
-//     const storedTodoItems: ITodoItem[] = loadLocalStorage();
-//     const dispatch = useCustomDispatch();
-//     for (const todoItem of storedTodoItems) {
-//       dispatch(addTodo({
-//         id: todoItem.id,
-//         text: todoItem.text,
-//         completed: todoItem.completed,
-//       }));
-//     }
-//   }, []);
-
-  const todoItems: ITodoItem[] = useCustomSelector((state: TodoRootState) => state.todoItems);
+const TodoList: React.FC<TodoListProps> = ({ todoItems }: TodoListProps) => {
   return (
     <ul id="todoList" className={styles.todoList}>
       {todoItems.map(todoItem => (

@@ -1,34 +1,35 @@
 import { ITodoItem } from "@/domain/todo/ITodoItem";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { loadLocalStorage, updateLocalStorage } from "@/domain/todo/localStorageManager";
-
-let initialState: ITodoItem[] = loadLocalStorage();
+import { loadTodoItemsStorage, updateTodoItemsStorage } from "@/domain/localStorageManager";
 
 const todoItemsSlice = createSlice({
   name: "todoItems",
-  initialState: initialState,
+  initialState: [] as ITodoItem[],
   reducers: {
+    initTodo(state, action: PayloadAction) {
+      return loadTodoItemsStorage();
+    },
     addTodo(state, action: PayloadAction<ITodoItem>) {
       state.push(action.payload);
-      updateLocalStorage(state);
+      updateTodoItemsStorage(state);
     },
     deleteTodo(state, action: PayloadAction<number>) {
       const newState = state.filter(todo => todo.id !== action.payload);
-      updateLocalStorage(newState);
+      updateTodoItemsStorage(newState);
       return newState;
     },
     editTodo(state, action: PayloadAction<ITodoItem>) {
       const index = state.findIndex(todo => todo.id === action.payload.id);
       state[index].text = action.payload.text;
-      updateLocalStorage(state);
+      updateTodoItemsStorage(state);
     },
     toggleTodo(state, action: PayloadAction<number>) {
       const todo: ITodoItem = state.find(todo => todo.id === action.payload)!;
       todo.completed = !todo.completed;
-      updateLocalStorage(state);
+      updateTodoItemsStorage(state);
     },
   },
 });
 
-export const { addTodo, deleteTodo, editTodo, toggleTodo } = todoItemsSlice.actions;
-export const todoItemReducer = todoItemsSlice.reducer
+export const { initTodo, addTodo, deleteTodo, editTodo, toggleTodo } = todoItemsSlice.actions;
+export const todoItemsReducer = todoItemsSlice.reducer

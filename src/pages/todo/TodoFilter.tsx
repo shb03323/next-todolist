@@ -1,14 +1,16 @@
 import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { useCustomDispatch, useCustomSelector } from "@/domain/todo/hooks";
-import { TodoRootState } from "@/domain/todo/store";
-import { ReactElement, useRef } from "react";
-import styles from "@/styles/TodoPage.module.css";
+import { useCustomDispatch, useCustomSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import React, { ReactElement, useRef } from "react";
+import styles from "@/pages/todo/styles/TodoPage.module.css";
 import { setFilter } from "@/domain/todo/filterSlice";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
+import { UserIdProps } from "@/pages/todo/props/UserIdProps";
 
-const TodoFilter = (): ReactElement => {
-  const todoItems: ITodoItem[] = useCustomSelector((state: TodoRootState) => state.todoItems);
-  const currentFilter: FilterType = useCustomSelector((state: TodoRootState) => state.filter);
+const TodoFilter: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
+  const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
+    .filter(todo => todo.userId === userId);
+  const currentFilter: FilterType = useCustomSelector((state: RootState) => state.filter);
   const dispatch = useCustomDispatch();
 
   const allTagRef = useRef<HTMLAnchorElement>(null);
@@ -26,7 +28,7 @@ const TodoFilter = (): ReactElement => {
       default:
         return true;
     }
-  })
+  });
 
   const handleFilterChange = (filter: FilterType) => {
     dispatch(setFilter(filter));

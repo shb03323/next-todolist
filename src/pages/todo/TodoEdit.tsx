@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "@/styles/TodoPage.module.css";
+import styles from "@/pages/todo/styles/TodoPage.module.css";
 import { TodoEditProps } from "@/pages/todo/props/TodoEditProps";
-import { useCustomDispatch } from "@/domain/todo/hooks";
+import { useCustomDispatch } from "@/redux/hooks";
 import { editTodo } from "@/domain/todo/todoItemsSlice";
 
 const TodoEdit: React.FC<TodoEditProps> = ({ todo, editInputRef, todoLiRef }: TodoEditProps) => {

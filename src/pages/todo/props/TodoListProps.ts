@@ -1,5 +1,5 @@
-import React from "react";
+import { ITodoItem } from "@/domain/todo/ITodoItem";
 
 export interface TodoListProps {
-  todoLiRef: React.RefObject<HTMLLIElement>;
+  todoItems: ITodoItem[];
 }

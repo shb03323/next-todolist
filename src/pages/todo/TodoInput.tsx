@@ -1,9 +1,11 @@
-import styles from "@/styles/TodoPage.module.css";
+import styles from "@/pages/todo/styles/TodoPage.module.css";
 import React, { useRef, useState } from "react";
 import { addTodo } from "@/domain/todo/todoItemsSlice";
-import { useCustomDispatch } from "@/domain/todo/hooks";
+import { useCustomDispatch } from "@/redux/hooks";
+import { UserIdProps } from "@/pages/todo/props/UserIdProps";
+import user from "@/pages/user";
 
-const TodoInput = () => {
+const TodoInput: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   const addInputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState<string>("");
   const dispatch = useCustomDispatch();
@@ -15,6 +17,7 @@ const TodoInput = () => {
           id: Date.now(),
           text: text,
           completed: false,
+          userId: userId,
         }));
         setText("");
       }

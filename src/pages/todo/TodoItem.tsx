@@ -1,7 +1,7 @@
-import styles from "@/styles/TodoPage.module.css";
+import styles from "@/pages/todo/styles/TodoPage.module.css";
 import { deleteTodo, toggleTodo } from "@/domain/todo/todoItemsSlice";
 import React, { useEffect, useRef } from "react";
-import { useCustomDispatch, useCustomSelector } from "@/domain/todo/hooks";
+import { useCustomDispatch, useCustomSelector } from "@/redux/hooks";
 import { TodoItemProps } from "@/pages/todo/props/TodoItemProps";
 import TodoEdit from "@/pages/todo/TodoEdit";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
