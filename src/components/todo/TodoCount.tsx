@@ -5,6 +5,15 @@ import { ITodoItem } from "@/domain/todo/ITodoItem";
 import { useCustomSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { UserIdProps } from "@/components/todo/props/UserIdProps";
+import styled from "@emotion/styled";
+
+const StyledTodoCount = styled.span`
+    float: left;
+    text-align: left;
+    .strong {
+        font-weight: 300;
+    }
+`;
 
 const TodoCount: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
@@ -25,7 +34,7 @@ const TodoCount: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   });
 
   return (
-    <span className={styles.todoCount}>총 <strong>{filteredTodoItems.length}</strong> 개</span>
+    <StyledTodoCount>총 <strong>{filteredTodoItems.length}</strong> 개</StyledTodoCount>
   );
 };
 

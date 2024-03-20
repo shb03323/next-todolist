@@ -1,15 +1,25 @@
-import styles from "@/components/todo/styles/TodoPage.module.css";
 import React from "react";
 import TodoItem from "@/components/todo/TodoItem";
-import { TodoListProps } from "@/components/todo/props/TodoListProps";
+import styled from "@emotion/styled";
+import { ITodoItem } from "@/domain/todo/ITodoItem";
 
-const TodoList: React.FC<TodoListProps> = ({ todoItems }: TodoListProps) => {
+const StyledTodoList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style: none;
+`;
+
+interface Props {
+  todoItems: ITodoItem[];
+}
+
+const TodoList = ({ todoItems }: Props) => {
   return (
-    <ul id="todoList" className={styles.todoList}>
+    <StyledTodoList>
       {todoItems.map(todoItem => (
         <TodoItem key={todoItem.id} todo={todoItem} />
       ))}
-    </ul>
+    </StyledTodoList>
   );
 };
 
