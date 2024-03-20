@@ -5,6 +5,7 @@ import UserList from "@/components/user/UserList";
 import { initUsers } from "@/domain/user/usersSlice";
 import { useCustomDispatch } from "@/redux/hooks";
 import { initTodo } from "@/domain/todo/todoItemsSlice";
+import { DidisyTemplate } from "@/components/common/DidisyTemplate";
 
 const UserPage = (): ReactElement => {
   const dispatch = useCustomDispatch();
@@ -15,10 +16,10 @@ const UserPage = (): ReactElement => {
   }, [dispatch]);
 
   return (
-    <div className={styles.userPage}>
+    <DidisyTemplate>
       <UserInput />
       <UserList />
-    </div>
+    </DidisyTemplate>
   );
 };
 
