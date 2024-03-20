@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import Head from "next/head";
-import TodoInput from "@/pages/todo/TodoInput";
-import TodoList from "@/pages/todo/TodoList";
+import TodoInput from "@/components/todo/TodoInput";
+import TodoList from "@/components/todo/TodoList";
 import { RootState } from "@/redux/store";
-import TodoFilter from "@/pages/todo/TodoFilter";
+import TodoFilter from "@/components/todo/TodoFilter";
 import { ITodoItem } from "@/domain/todo/ITodoItem";
 import { useCustomSelector } from "@/redux/hooks";
 import { useRouter } from "next/router";

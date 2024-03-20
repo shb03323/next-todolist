@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
 import { ITodoItem } from "@/domain/todo/ITodoItem";
 import { useCustomSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { UserIdProps } from "@/pages/todo/props/UserIdProps";
+import { UserIdProps } from "@/components/todo/props/UserIdProps";
 
 const TodoCount: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)

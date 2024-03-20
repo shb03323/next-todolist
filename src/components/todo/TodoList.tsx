@@ -1,7 +1,7 @@
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import React from "react";
-import TodoItem from "@/pages/todo/TodoItem";
-import { TodoListProps } from "@/pages/todo/props/TodoListProps";
+import TodoItem from "@/components/todo/TodoItem";
+import { TodoListProps } from "@/components/todo/props/TodoListProps";
 
 const TodoList: React.FC<TodoListProps> = ({ todoItems }: TodoListProps) => {
   return (

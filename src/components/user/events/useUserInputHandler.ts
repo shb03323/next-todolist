@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useCustomDispatch } from "@/redux/hooks";
 import { addUser } from "@/domain/user/usersSlice";
-import koreanInputPrevent from "@/pages/util/events/koreanInputPrevent";
+import koreanInputPrevent from "@/util/events/koreanInputPrevent";
 
 const useUserInputHandler = () => {
   const [text, setText] = useState<string>("");

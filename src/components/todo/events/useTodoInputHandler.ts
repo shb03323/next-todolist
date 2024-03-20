@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { addTodo } from "@/domain/todo/todoItemsSlice";
 import { useCustomDispatch } from "@/redux/hooks";
-import koreanInputPrevent from "@/pages/util/events/koreanInputPrevent";
+import koreanInputPrevent from "@/util/events/koreanInputPrevent";
 
 const useTodoInputHandler = (
   text: string,

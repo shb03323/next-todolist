@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
-import styles from "@/pages/users/styles/UserPage.module.css";
+import styles from "@/components/user/styles/UserPage.module.css";
 import { useCustomSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { IUser } from "@/domain/user/IUser";
-import useUserLiDoubleClickHandler from "@/pages/users/events/useUserLiDoubleClickHandler";
+import useUserLiDoubleClickHandler from "@/components/user/events/useUserLiDoubleClickHandler";
 
 const UserList = (): ReactElement => {
   const users: IUser[] = useCustomSelector((state: RootState) => state.users);

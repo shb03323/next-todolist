@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import { TodoItemFilter } from "@/domain/todo/FilterType";
-import { UserIdProps } from "@/pages/todo/props/UserIdProps";
-import useTodoFilterHandler from "@/pages/todo/events/useTodoFilterHandler";
-import TodoCount from "@/pages/todo/TodoCount";
+import { UserIdProps } from "@/components/todo/props/UserIdProps";
+import useTodoFilterHandler from "@/components/todo/events/useTodoFilterHandler";
+import TodoCount from "@/components/todo/TodoCount";
 
 const TodoFilter: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   const allTagRef = useRef<HTMLAnchorElement>(null);

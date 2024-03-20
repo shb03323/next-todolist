@@ -1,10 +1,10 @@
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import React, { useEffect, useRef } from "react";
 import { useCustomSelector } from "@/redux/hooks";
-import { TodoItemProps } from "@/pages/todo/props/TodoItemProps";
-import TodoEdit from "@/pages/todo/TodoEdit";
+import { TodoItemProps } from "@/components/todo/props/TodoItemProps";
+import TodoEdit from "@/components/todo/TodoEdit";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
-import useTodoItemHandler from "@/pages/todo/events/useTodoItemHandler";
+import useTodoItemHandler from "@/components/todo/events/useTodoItemHandler";
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo }: TodoItemProps) => {
   const currentFilter = useCustomSelector(state => state.filter);

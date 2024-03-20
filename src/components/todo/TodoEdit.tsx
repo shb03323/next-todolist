@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "@/pages/todo/styles/TodoPage.module.css";
-import { TodoEditProps } from "@/pages/todo/props/TodoEditProps";
-import useTodoEditHandler from "@/pages/todo/events/useTodoEditHandler";
+import styles from "@/components/todo/styles/TodoPage.module.css";
+import { TodoEditProps } from "@/components/todo/props/TodoEditProps";
+import useTodoEditHandler from "@/components/todo/events/useTodoEditHandler";
 
 const TodoEdit: React.FC<TodoEditProps> = ({ todo, editInputRef, todoLiRef }: TodoEditProps) => {
   const { handleKeyDown } = useTodoEditHandler(todo, todoLiRef);

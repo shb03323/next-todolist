@@ -1,7 +1,7 @@
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import React, { useRef, useState } from "react";
-import { UserIdProps } from "@/pages/todo/props/UserIdProps";
-import useTodoInputHandler from "@/pages/todo/events/useTodoInputHandler";
+import { UserIdProps } from "@/components/todo/props/UserIdProps";
+import useTodoInputHandler from "@/components/todo/events/useTodoInputHandler";
 
 const TodoInput: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   const addInputRef = useRef<HTMLInputElement>(null);

@@ -1,4 +1,4 @@
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import { deleteTodo, toggleTodo } from "@/domain/todo/todoItemsSlice";
 import { ITodoItem } from "@/domain/todo/ITodoItem";
 import React, { useCallback } from "react";

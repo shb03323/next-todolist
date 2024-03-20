@@ -1,6 +1,6 @@
 import { FilterType } from "@/domain/todo/FilterType";
 import { setFilter } from "@/domain/todo/filterSlice";
-import styles from "@/pages/todo/styles/TodoPage.module.css";
+import styles from "@/components/todo/styles/TodoPage.module.css";
 import React, { useCallback } from "react";
 import { useCustomDispatch } from "@/redux/hooks";
 

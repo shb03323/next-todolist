@@ -1,6 +1,6 @@
 import React, { ReactElement, useRef } from "react";
-import styles from "@/pages/users/styles/UserPage.module.css";
-import useUserInputHandler from "@/pages/users/events/useUserInputHandler";
+import styles from "@/components/user/styles/UserPage.module.css";
+import useUserInputHandler from "@/components/user/events/useUserInputHandler";
 
 const UserInput = (): ReactElement => {
   const addInputRef = useRef<HTMLInputElement>(null);
