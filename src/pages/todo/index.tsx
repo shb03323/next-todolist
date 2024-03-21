@@ -1,20 +1,11 @@
 import React, { ReactElement } from "react";
-import styles from "@/components/todo/styles/TodoPage.module.css";
 import Head from "next/head";
-import TodoInput from "@/components/todo/TodoInput";
-import TodoList from "@/components/todo/TodoList";
-import { RootState } from "@/redux/store";
-import TodoFilter from "@/components/todo/TodoFilter";
-import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { useCustomSelector } from "@/redux/hooks";
 import { useRouter } from "next/router";
+import TodoPage from "@/components/pages/todo/TodoPage";
 
-const TodoPage = (): ReactElement => {
+const Todo = (): ReactElement => {
   const router = useRouter();
   const userId = Number(router.query.userId);
-
-  const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
-    .filter(todo => todo.userId === userId);
 
   return (
     <>
@@ -24,16 +15,9 @@ const TodoPage = (): ReactElement => {
         <title>이벤트 - TODOS</title>
       </Head>
       <a href="/users">유저 목록으로 가기</a>
-      <div className={styles.todoapp}>
-        <h1>TODOS</h1>
-        <TodoInput userId={userId} />
-        <main>
-          <TodoList todoItems={todoItems} />
-          <TodoFilter userId={userId} />
-        </main>
-      </div>
+      <TodoPage userId={userId} />
     </>
   );
 };
 
-export default TodoPage;
+export default Todo;

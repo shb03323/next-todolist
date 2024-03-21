@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { useCustomSelector } from "@/redux/hooks";
-import { TodoItemProps } from "@/components/todo/props/TodoItemProps";
-import TodoEdit from "@/components/todo/TodoEdit";
+import TodoEditMolecule from "@/components/molecules/todo/TodoEditMolecule";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
 import styled from "@emotion/styled";
-import { DidisyLiTag } from "@/components/common/DidisyLiTag";
-import TodoInfoMolecule from "@/components/todo/TodoInfoMolecule";
+import { DidisyLi } from "@/components/common/DidisyLi";
+import TodoInfoMolecule from "@/components/molecules/todo/TodoInfoMolecule";
+import { ITodoItem } from "@/domain/todo/ITodoItem";
 
-interface Props {
+interface StyledProps {
   filter: FilterType;
   completed: boolean;
   isEditing: boolean;
 }
 
-const TodoLiTag = styled(DidisyLiTag)<Props>`
-    &:hover {
-        .destroyButton {
-            display: block;
-        }
+const StyledLi = styled(DidisyLi)<StyledProps>`
+    &:hover > button {
+        display: block;
     }
 
     ${(props) => {
@@ -32,14 +30,18 @@ const TodoLiTag = styled(DidisyLiTag)<Props>`
                 return "display: block;";
         }
     }}
-    
+
     ${(props) => props.isEditing && `
     border-bottom: none;
     padding: 0;
   `}
 `;
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo }: TodoItemProps) => {
+interface Props {
+  todo: ITodoItem;
+}
+
+const TodoItem = ({ todo }: Props) => {
   const currentFilter = useCustomSelector(state => state.filter);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -47,14 +49,15 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }: TodoItemProps) => {
   const handleEditDone = () => setIsEditing(false);
 
   return (
-    <TodoLiTag
+    <StyledLi
       filter={currentFilter}
       completed={todo.completed}
       isEditing={isEditing}
-      onDoubleClick={handleDoubleClick}>
+      onDoubleClick={handleDoubleClick}
+    >
       {!isEditing && <TodoInfoMolecule todo={todo} />}
-      {isEditing && <TodoEdit todo={todo} onEditDone={handleEditDone} />}
-    </TodoLiTag>
+      {isEditing && <TodoEditMolecule todo={todo} onEditDone={handleEditDone} />}
+    </StyledLi>
   );
 };
 

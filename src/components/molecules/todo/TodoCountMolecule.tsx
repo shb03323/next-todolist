@@ -1,21 +1,21 @@
 import React from "react";
-import styles from "@/components/todo/styles/TodoPage.module.css";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
 import { ITodoItem } from "@/domain/todo/ITodoItem";
 import { useCustomSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { UserIdProps } from "@/components/todo/props/UserIdProps";
+import { UserIdProps } from "@/components/common/props/UserIdProps";
 import styled from "@emotion/styled";
 
-const StyledTodoCount = styled.span`
+const StyledSpan = styled.span`
     float: left;
     text-align: left;
-    .strong {
-        font-weight: 300;
+
+    & > strong {
+        font-weight: 600;
     }
 `;
 
-const TodoCount: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
+const TodoCountMolecule = ({ userId }: UserIdProps) => {
   const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
     .filter(todo => todo.userId === userId);
   const currentFilter: FilterType = useCustomSelector((state: RootState) => state.filter);
@@ -34,8 +34,8 @@ const TodoCount: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   });
 
   return (
-    <StyledTodoCount>총 <strong>{filteredTodoItems.length}</strong> 개</StyledTodoCount>
+    <StyledSpan>총 <strong>{filteredTodoItems.length}</strong> 개</StyledSpan>
   );
 };
 
-export default TodoCount;
+export default TodoCountMolecule;

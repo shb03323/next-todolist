@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const DidisyTemplate = styled.div`
+export const DidisyMainContainer = styled.div`
     background: #fff;
     margin: 130px 0 40px 0;
     position: relative;

@@ -1,26 +1,28 @@
-import { ReactElement, useEffect } from "react";
-import styles from "@/components/user/styles/UserPage.module.css";
-import UserInput from "@/components/user/UserInput";
-import UserList from "@/components/user/UserList";
+import React, { ReactElement, useEffect } from "react";
 import { initUsers } from "@/domain/user/usersSlice";
 import { useCustomDispatch } from "@/redux/hooks";
 import { initTodo } from "@/domain/todo/todoItemsSlice";
-import { DidisyTemplate } from "@/components/common/DidisyTemplate";
+import Head from "next/head";
+import UserPage from "@/components/pages/user/UserPage";
 
-const UserPage = (): ReactElement => {
+const User = (): ReactElement => {
   const dispatch = useCustomDispatch();
 
   useEffect(() => {
     dispatch(initUsers());
-    dispatch(initTodo())
+    dispatch(initTodo());
   }, [dispatch]);
 
   return (
-    <DidisyTemplate>
-      <UserInput />
-      <UserList />
-    </DidisyTemplate>
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>박정훈 화이팅!</title>
+      </Head>
+      <UserPage />
+    </>
   );
 };
 
-export default UserPage;
+export default User;

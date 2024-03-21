@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const DidisyLiTag = styled.li`
+export const DidisyLi = styled.li`
     position: relative;
     font-size: 24px;
     border-bottom: 1px solid #ededed;

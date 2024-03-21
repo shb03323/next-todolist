@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { UserIdProps } from "@/components/todo/props/UserIdProps";
+import { UserIdProps } from "@/components/common/props/UserIdProps";
 import { DidisyInput } from "@/components/common/DidisyInput";
 import { useCustomDispatch } from "@/redux/hooks";
 import koreanInputPrevent from "@/util/events/koreanInputPrevent";
 import { addTodo } from "@/domain/todo/todoItemsSlice";
 
-const TodoInput: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
+const TodoInputMolecule = ({ userId }: UserIdProps) => {
   const dispatch = useCustomDispatch();
   const [text, setText] = useState<string>("");
 
-  const handleKeyPress = (event: React.KeyboardEvent<Element>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (koreanInputPrevent(event)) return;
       if (text.trim() !== "") {
@@ -38,4 +38,4 @@ const TodoInput: React.FC<UserIdProps> = ({ userId }: UserIdProps) => {
   );
 };
 
-export default TodoInput;
+export default TodoInputMolecule;
