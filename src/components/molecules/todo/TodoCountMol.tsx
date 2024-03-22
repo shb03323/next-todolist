@@ -1,10 +1,7 @@
 import React from "react";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
-import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { useCustomSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import { UserIdProps } from "@/components/common/props/UserIdProps";
 import styled from "@emotion/styled";
+import TodoItem from "@/domain/todo/TodoItem";
 
 const StyledSpan = styled.span`
     float: left;
@@ -15,12 +12,13 @@ const StyledSpan = styled.span`
     }
 `;
 
-const TodoCountMolecule = ({ userId }: UserIdProps) => {
-  const todoItems: ITodoItem[] = useCustomSelector((state: RootState) => state.todoItems)
-    .filter(todo => todo.userId === userId);
-  const currentFilter: FilterType = useCustomSelector((state: RootState) => state.filter);
+interface Props {
+  todoItemsOfUser: TodoItem[];
+  currentFilter: FilterType;
+}
 
-  const filteredTodoItems = todoItems.filter(todo => {
+const TodoCountMol = ({ todoItemsOfUser, currentFilter }: Props) => {
+  const filteredTodoItems = todoItemsOfUser.filter(todo => {
     switch (currentFilter) {
       case TodoItemFilter.ALL:
         return true;
@@ -38,4 +36,4 @@ const TodoCountMolecule = ({ userId }: UserIdProps) => {
   );
 };
 
-export default TodoCountMolecule;
+export default TodoCountMol;

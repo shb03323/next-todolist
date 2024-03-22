@@ -1,18 +1,22 @@
 import React, { ReactElement, useState } from "react";
 import { DidisyInput } from "@/components/common/DidisyInput";
-import { useCustomDispatch } from "@/redux/hooks";
 import koreanInputPrevent from "@/util/events/koreanInputPrevent";
-import { addUser } from "@/domain/user/usersSlice";
+import Users from "@/domain/user/Users";
+import useUpdateUsers from "@/util/user/useUpdateUsers";
 
-const UserInputMolecule = (): ReactElement => {
-  const dispatch = useCustomDispatch();
+interface Props {
+  users: Users;
+}
+
+const UserInputMolecule = ({ users }: Props): ReactElement => {
+  const updateUsers = useUpdateUsers(users);
   const [text, setText] = useState<string>("");
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (koreanInputPrevent(event)) return;
       if (text.trim() !== "") {
-        dispatch(addUser({ id: Date.now(), name: text }));
+        updateUsers((newUsers: Users) => newUsers.add({ id: Date.now(), name: text }));
         setText("");
       }
     }

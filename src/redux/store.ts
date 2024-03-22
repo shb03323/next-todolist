@@ -1,12 +1,10 @@
-import { todoItemsReducer } from "@/domain/todo/todoItemsSlice";
+import { todoItemsReducer } from "@/redux/todoItemsSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import { filterReducer } from "@/domain/todo/filterSlice";
-import { usersReducer } from "@/domain/user/usersSlice";
+import { usersReducer } from "@/redux/usersSlice";
 
 const store = configureStore({
   reducer: {
     todoItems: todoItemsReducer,
-    filter: filterReducer,
     users: usersReducer,
   },
 });

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const DestroyButton = styled.button`
+export const TodoDestroyButton = styled.button`
     display: none;
     position: absolute;
     top: 0;

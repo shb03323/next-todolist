@@ -1,9 +1,20 @@
 import React, { ReactElement } from "react";
-import { UserIdProps } from "@/components/common/props/UserIdProps";
 import TodoListTemplate from "@/components/templates/todo/TodoListTemplate";
+import TodoItems from "@/domain/todo/TodoItems";
 
-const TodoPage = ({ userId }: UserIdProps): ReactElement => {
-  return <TodoListTemplate userId={userId} />;
+interface Props {
+  todoItems: TodoItems;
+  userId: number;
+  onToggle: () => void;
+}
+
+const TodoPage = ({ todoItems, userId, onToggle }: Props): ReactElement => {
+  return (
+    <>
+      <a onClick={onToggle}>user 페이지로 가기</a>
+      <TodoListTemplate todoItems={todoItems} userId={userId} />
+    </>
+  );
 };
 
 export default TodoPage;

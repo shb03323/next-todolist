@@ -1,23 +1,24 @@
 import React, { ReactElement } from "react";
-import { useCustomSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import { IUser } from "@/domain/user/IUser";
 import { DidisyLabel } from "@/components/common/DidisyLabel";
 import { DidisyLi } from "@/components/common/DidisyLi";
 import { DidisyUl } from "@/components/common/DidisyUl";
-import { useRouter } from "next/router";
+import Users from "@/domain/user/Users";
 
-const UserOrganism = (): ReactElement => {
-  const router = useRouter();
-  const users: IUser[] = useCustomSelector((state: RootState) => state.users);
+interface Props {
+  users: Users;
+  onToggle: () => void;
+  onSelectUser: (userId: number) => void;
+}
 
+const UserListOrg = ({ users, onToggle, onSelectUser }: Props): ReactElement => {
   const handleDoubleClick = (userId: number) => {
-    router.push(`/todo?userId=${userId}`);
+    onSelectUser(userId);
+    onToggle();
   };
 
   return (
     <DidisyUl>
-      {users.map(user => (
+      {users.getAll().map(user => (
         <DidisyLi key={user.id} onDoubleClick={() => handleDoubleClick(user.id)}>
           <DidisyLabel>{user.name}</DidisyLabel>
         </DidisyLi>
@@ -26,4 +27,4 @@ const UserOrganism = (): ReactElement => {
   );
 };
 
-export default UserOrganism;
+export default UserListOrg;

@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { UserIdProps } from "@/components/common/props/UserIdProps";
 import { DidisyInput } from "@/components/common/DidisyInput";
-import { useCustomDispatch } from "@/redux/hooks";
 import koreanInputPrevent from "@/util/events/koreanInputPrevent";
-import { addTodo } from "@/domain/todo/todoItemsSlice";
+import TodoItem from "@/domain/todo/TodoItem";
+import TodoItems from "@/domain/todo/TodoItems";
+import useUpdateTodos from "@/util/todo/useUpdateTodos";
 
-const TodoInputMolecule = ({ userId }: UserIdProps) => {
-  const dispatch = useCustomDispatch();
+interface Props {
+  todos: TodoItems;
+  userId: number;
+}
+
+const TodoInputMol = ({ todos, userId }: Props) => {
+  const updateTodos = useUpdateTodos(todos);
   const [text, setText] = useState<string>("");
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (koreanInputPrevent(event)) return;
       if (text.trim() !== "") {
-        dispatch(addTodo({
-          id: Date.now(),
-          text: text,
-          completed: false,
-          userId: userId,
-        }));
+        updateTodos((newTodos: TodoItems) => newTodos.add(TodoItem.of(text, userId)));
         setText("");
       }
     }
@@ -38,4 +38,4 @@ const TodoInputMolecule = ({ userId }: UserIdProps) => {
   );
 };
 
-export default TodoInputMolecule;
+export default TodoInputMol;

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
-import { UserIdProps } from "@/components/common/props/UserIdProps";
-import TodoCountMolecule from "@/components/molecules/todo/TodoCountMolecule";
-import { useCustomDispatch } from "@/redux/hooks";
-import { setFilter } from "@/domain/todo/filterSlice";
+import TodoCountMol from "@/components/molecules/todo/TodoCountMol";
 import styled from "@emotion/styled";
+import TodoItem from "@/domain/todo/TodoItem";
 
 const Container = styled.div`
     color: #777;
@@ -65,24 +63,27 @@ const StyledLink = styled.a<StyledProps>`
 }
 `;
 
-const TodoFilter = ({ userId }: UserIdProps) => {
-  const dispatch = useCustomDispatch();
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>(TodoItemFilter.ALL);
+interface Props {
+  todoItemsOfUser: TodoItem[]
+  currentFilter: FilterType;
+  setFilter: (filter: FilterType) => void;
+}
+
+const TodoFilter = ({ todoItemsOfUser, currentFilter, setFilter }: Props) => {
 
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(setFilter(filter));
-    setSelectedFilter(filter);
+    setFilter(filter);
   };
 
   // TODO: StyledLink 재사용성...?
   return (
     <Container>
-      <TodoCountMolecule userId={userId} />
+      <TodoCountMol todoItemsOfUser={todoItemsOfUser} currentFilter={currentFilter} />
       <ListWrapper>
         <StyledLi>
           <StyledLink
             filter={TodoItemFilter.ALL}
-            selectedFilter={selectedFilter}
+            selectedFilter={currentFilter}
             onClick={() => handleFilterChange(TodoItemFilter.ALL)}
           >
             전체보기
@@ -91,7 +92,7 @@ const TodoFilter = ({ userId }: UserIdProps) => {
         <StyledLi>
           <StyledLink
             filter={TodoItemFilter.ACTIVE}
-            selectedFilter={selectedFilter}
+            selectedFilter={currentFilter}
             onClick={() => handleFilterChange(TodoItemFilter.ACTIVE)}
           >
             해야할 일
@@ -100,7 +101,7 @@ const TodoFilter = ({ userId }: UserIdProps) => {
         <StyledLi>
           <StyledLink
             filter={TodoItemFilter.COMPLETED}
-            selectedFilter={selectedFilter}
+            selectedFilter={currentFilter}
             onClick={() => handleFilterChange(TodoItemFilter.COMPLETED)}
           >
             완료한 일

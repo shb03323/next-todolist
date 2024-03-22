@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ITodoItem } from "@/domain/todo/ITodoItem";
-import { editTodo } from "@/domain/todo/todoItemsSlice";
-import { useCustomDispatch } from "@/redux/hooks";
 import styled from "@emotion/styled";
+import TodoItem from "@/domain/todo/TodoItem";
+import TodoItems from "@/domain/todo/TodoItems";
+import useUpdateTodos from "@/util/todo/useUpdateTodos";
 
 const StyledInput = styled.input`
     color: #acacac;
@@ -14,12 +14,13 @@ const StyledInput = styled.input`
 `;
 
 interface Props {
-  todo: ITodoItem;
+  todo: TodoItem;
+  todos: TodoItems;
   onEditDone: () => void;
 }
 
-const TodoEditMolecule = ({ todo, onEditDone }: Props) => {
-  const dispatch = useCustomDispatch();
+const TodoEditMol = ({ todo, todos, onEditDone }: Props) => {
+  const updateTodos = useUpdateTodos(todos);
   const [text, setText] = useState(todo.text);
 
   const ref = useRef<HTMLInputElement>(null);
@@ -34,7 +35,7 @@ const TodoEditMolecule = ({ todo, onEditDone }: Props) => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      dispatch(editTodo({ ...todo, text: text }));
+      updateTodos((newTodos: TodoItems) => newTodos.changeText(todo, text));
       onEditDone();
     } else if (event.key === "Escape") {
       onEditDone();
@@ -47,9 +48,9 @@ const TodoEditMolecule = ({ todo, onEditDone }: Props) => {
       value={text}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
-      // onBlur={onEditDone}
+      onBlur={onEditDone}
     />
   );
 };
 
-export default TodoEditMolecule;
+export default TodoEditMol;

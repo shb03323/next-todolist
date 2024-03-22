@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useCustomSelector } from "@/redux/hooks";
-import TodoEditMolecule from "@/components/molecules/todo/TodoEditMolecule";
+import TodoEditMol from "@/components/molecules/todo/TodoEditMol";
 import { FilterType, TodoItemFilter } from "@/domain/todo/FilterType";
 import styled from "@emotion/styled";
 import { DidisyLi } from "@/components/common/DidisyLi";
-import TodoInfoMolecule from "@/components/molecules/todo/TodoInfoMolecule";
-import { ITodoItem } from "@/domain/todo/ITodoItem";
+import TodoInfoMol from "@/components/molecules/todo/TodoInfoMol";
+import TodoItems from "@/domain/todo/TodoItems";
+import TodoItem from "@/domain/todo/TodoItem";
 
 interface StyledProps {
   filter: FilterType;
@@ -38,11 +38,12 @@ const StyledLi = styled(DidisyLi)<StyledProps>`
 `;
 
 interface Props {
-  todo: ITodoItem;
+  todo: TodoItem;
+  todos: TodoItems;
+  currentFilter: FilterType;
 }
 
-const TodoItem = ({ todo }: Props) => {
-  const currentFilter = useCustomSelector(state => state.filter);
+const TodoItemInfo = ({ todo, todos, currentFilter }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDoubleClick = () => setIsEditing(true);
@@ -55,10 +56,10 @@ const TodoItem = ({ todo }: Props) => {
       isEditing={isEditing}
       onDoubleClick={handleDoubleClick}
     >
-      {!isEditing && <TodoInfoMolecule todo={todo} />}
-      {isEditing && <TodoEditMolecule todo={todo} onEditDone={handleEditDone} />}
+      {!isEditing && <TodoInfoMol todo={todo} todos={todos} />}
+      {isEditing && <TodoEditMol todo={todo} todos={todos} onEditDone={handleEditDone} />}
     </StyledLi>
   );
 };
 
-export default TodoItem;
+export default TodoItemInfo;
